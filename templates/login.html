@@ -1,0 +1,17 @@
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """ Gère la connexion des utilisateurs. (SCRUM-17)"""
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = db.session.execute(db.select(User).filter_by(username=username)).scalar_one_or_none()
+        if user and user.check_password(password):
+            login_user(user)
+            flash('Connexion réussie!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Nom d\'utilisateur ou mot de passe incorrect.', 'danger')
+            return redirect(url_for('login'))
+    return render_template('login.html', title='Connexion')

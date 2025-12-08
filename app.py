@@ -29,3 +29,12 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
+from flask_login import login_required # Assurez-vous d'avoir cette importation
+
+# ROUTE POUR AFFICHER LES PRODUITS
+@app.route('/products')
+@login_required # Sécurité : seule les utilisateurs connectés peuvent voir la liste
+def product_list():
+    # Récupère tous les produits triés par nom
+    products = db.session.execute(db.select(Product).order_by(Product.name)).scalars().all()
+    return render_template('products.html', products=products, title='Liste des produits')

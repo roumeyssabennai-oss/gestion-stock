@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Bienvenue sur l'application de gestion d'inventaire !</h1>
+    {% if current_user.is_authenticated %}
+        <p>Vous êtes connecté. <a href="{{ url_for('product_list') }}">Voir les produits</a>.</p>
+    {% else %}
+        <p>Veuillez vous <a href="{{ url_for('login') }}">connecter</a> ou vous <a href="{{ url_for('register') }}">inscrire</a>.</p>
+    {% endif %}
+{% endblock %}

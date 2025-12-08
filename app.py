@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# --- 1. SETUP ET CONFIGURATION ---
+# --- 1. SETUP ET CONFIGURATIONs ---
 app = Flask(name)
 app.config['SECRET_KEY'] = 'UNE_CLE_SECRETE_A_MODIFIER_EN_PROD'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -124,3 +124,4 @@ if name == 'main':
         # Crée les tables User et Product
         db.create_all() 
     app.run(debug=True)
+

@@ -64,4 +64,10 @@ def add_product():
         return redirect(url_for('product_list')) # Redirige vers la liste des produits
 
     return render_template('add_product.html', title='Ajouter un produit')
+    @app.route('/logout')
+def logout():
+    logout_user()
+    flash('Vous avez été déconnecté.', 'info')
+    return redirect(url_for('index'))
+
 

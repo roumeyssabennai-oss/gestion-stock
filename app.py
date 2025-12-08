@@ -22,21 +22,10 @@ def load_user(user_id):
     """ Charge l'utilisateur depuis l'ID de session. """
     return db.session.get(User, int(user_id))
 
+# Modèle de données pour les produits
 class Product(db.Model):
-    """ Modèle pour les produits en stock, lié à un utilisateur. """
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    reference = db.Column(db.String(50), nullable=False)
-    quantity = db.Column(db.Integer, default=0, nullable=False)
-    price = db.Column(db.Float, default=0.0, nullable=False)
-    
-    # Clé étrangère vers l'utilisateur
-    user_id = db.Column(db.Integer, ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(80), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
-    # Contrainte unique pour (référence, user_id)
-    __table_args__ = (
-        db.UniqueConstraint('reference', 'user_id', name='_user_reference_uc'),
-    )
-
-    def __repr__(self):
-        return f"<Product {self.name} by User {self.user_id}>"

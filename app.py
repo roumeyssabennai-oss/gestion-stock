@@ -64,3 +64,4 @@ def add_product():
         return redirect(url_for('product_list')) # Redirige vers la liste des produits
 
     return render_template('add_product.html', title='Ajouter un produit')
+
